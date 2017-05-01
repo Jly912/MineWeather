@@ -76,6 +76,7 @@ public class MineFragment extends BaseFragment {
                 getContext().startActivity(intent);
                 break;
             case R.id.ll_setting:
+                startActivity(new Intent(getActivity(),MySettingActivity.class));
                 break;
             case R.id.ll_start:
                 getContext().startActivity(new Intent(getContext(), StarSelectActivity.class));

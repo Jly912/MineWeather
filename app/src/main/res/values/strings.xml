@@ -8,6 +8,7 @@
     <string name="hint_register_user">请输入手机号</string>
     <string name="hint_register_pwd">请输入密码</string>
     <string name="account">账号：</string>
+    <string name="exit">退出登录</string>
 
     <string name="register">注册</string>
     <string name="forget_pwd">忘记密码？</string>
@@ -91,4 +92,12 @@
         GitHub: https://github.com/Jly912\n
         邮箱：jal912@163.com\n
     </string>
+    
+    <string name="xiaoyan">小燕</string>
+    <string name="xiaoyu">小宇</string>
+    <string name="xiaoqi">小琪</string>
+    <string name="xiaomei">小梅</string>
+    <string name="xiaoli">小莉</string>
+    <string name="xiaoxin">小新</string>
+    <string name="nanan">楠楠</string>
 </resources>

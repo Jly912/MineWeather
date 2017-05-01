@@ -28,11 +28,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="XNGKGxoIEFVFNzX1mhNX5fO0gXiWO8uU" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
 
-
-        </activity>
-
+        <activity android:name=".MainActivity"/>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,24 +44,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="135e74486e7254ab2fefbfaefc5d89e9" />
 
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
         <activity
             android:name="com.zaaach.citypicker.CityPickerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CityPicker.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="XNGKGxoIEFVFNzX1mhNX5fO0gXiWO8uU" />
 
         <activity android:name=".StarSelectActivity" />
 
@@ -66,6 +61,8 @@
         <activity android:name=".MyCityActivity"/>
 
         <activity android:name=".AboutActivity"/>
+
+        <activity android:name=".MySettingActivity"/>
     </application>
 
 </manifest>

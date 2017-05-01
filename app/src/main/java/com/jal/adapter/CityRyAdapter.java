@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jal.interfaces.OnRyClickListener;
@@ -74,17 +75,19 @@ public class CityRyAdapter extends RecyclerView.Adapter<CityRyAdapter.CityViewHo
         private TextView tvName;
         private ImageView ivImage;
         private OnRyClickListener listener;
+        private LinearLayout ll;
 
         public CityViewHolder(final View itemView, final OnRyClickListener listener) {
             super(itemView);
             this.listener = listener;
             tvName = (TextView) itemView.findViewById(R.id.tv_city_name);
             ivImage = (ImageView) itemView.findViewById(R.id.iv_del);
-            ivImage.setOnClickListener(new View.OnClickListener() {
+            ll= (LinearLayout) itemView.findViewById(R.id.ll_city);
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onItemClick(itemView, getAdapterPosition());
+                public void onClick(View view) {
+                    if(listener!=null){
+                        listener.onItemClick(itemView,getAdapterPosition());
                     }
                 }
             });

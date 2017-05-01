@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jal.adapter.CityRyAdapter;
@@ -53,7 +55,7 @@ public class MyCityActivity extends BaseActivity implements MyCityContract.View 
         user = SharedUtil.getString("username");
         pwd = SharedUtil.getString("pwd");
         presenter = new CityPresenter(this, this);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         citys = (List<String>) intent.getSerializableExtra("city");
 
         presenter.loadatas();
@@ -66,36 +68,56 @@ public class MyCityActivity extends BaseActivity implements MyCityContract.View 
         adapter.setListener(new OnRyClickListener() {
             @Override
             public void onItemClick(View view, final int position) {
-                Log.d("print", "----点击-");
-                Http.delCity(user, pwd, citys.get(position), new OnDownListener() {
+                ImageView iv= (ImageView) view.findViewById(R.id.iv_del);
+                iv.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void downSucc(Object object) {
-                        if (object != null) {
-                            int code = (int) object;
-                            switch (code) {
-                                case 0:
-                                    //删除成功
-                                    adapter.removeDate(position);
-                                    SharedUtil.putInt("cityNum", adapter.getCity().size());
-                                    showToast("删除成功！");
-                                    break;
-                                case 1:
-                                    //用户不存在该城市
-                                    showToast("用户不存在该城市！");
-                                    break;
-                                case -1:
-                                    //数据库操作失败
-                                    showToast("数据库操作失败!");
-                                    break;
+                    public void onClick(View view) {
+                        Http.delCity(user, pwd, citys.get(position), new OnDownListener() {
+                            @Override
+                            public void downSucc(Object object) {
+                                if (object != null) {
+                                    int code = (int) object;
+                                    switch (code) {
+                                        case 0:
+                                            //删除成功
+                                            adapter.removeDate(position);
+                                            SharedUtil.putInt("cityNum", adapter.getCity().size());
+                                            showToast("删除成功！");
+                                            break;
+                                        case 1:
+                                            //用户不存在该城市
+                                            showToast("用户不存在该城市！");
+                                            break;
+                                        case -1:
+                                            //数据库操作失败
+                                            showToast("数据库操作失败!");
+                                            break;
+                                    }
+                                }
                             }
-                        }
-                    }
 
-                    @Override
-                    public void downFilded() {
-                        showError();
+                            @Override
+                            public void downFilded() {
+                                showError();
+                            }
+                        });
                     }
                 });
+
+                LinearLayout ll= (LinearLayout) view.findViewById(R.id.ll_city);
+                ll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("print", "----点击-"+citys.get(position));
+                        Intent toMain=new Intent(MyCityActivity.this,MainActivity.class);
+//                        toMain.setAction("com.")
+                        toMain.putExtra("city",citys.get(position));
+                        startActivity(toMain);
+                    }
+                });
+
+
+
             }
         });
 

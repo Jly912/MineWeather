@@ -33,7 +33,7 @@ public class AppContext extends Application {
         try {
             OkGo.getInstance()
                     .debug("OkGo", Level.INFO, true)
-                    .setCacheMode(CacheMode.NO_CACHE)
+                    .setCacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
                     .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
                     .setRetryCount(3)
                     .setCookieStore(new PersistentCookieStore());

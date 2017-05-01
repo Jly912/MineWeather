@@ -11,11 +11,11 @@ public interface Api {
 
     String STAR_INFO="http://api.avatardata.cn/Constellation/Query?key=b4908c82d1324ea5be5298101b2142f7&consName=%s&type=today";
 
-    String LOGIN="http://192.168.1.30:8080/WeatherServer/LoginAction?username=%s&password=%s&style=%s";
+    String LOGIN="http://192.168.0.5:8088/WeatherServer/LoginAction?username=%s&password=%s&style=%s";
 
-    String REGIST="http://192.168.1.30:8080/WeatherServer/LoginAction?username=%s&password=%s&style=regist";
+    String REGIST="http://192.168.0.5:8088/WeatherServer/LoginAction?username=%s&password=%s&style=regist";
 
-    String INSERT_CITY="http://192.168.1.30:8080/WeatherServer/LoginAction?username=%s&password=%s&style=insertCity&city=%s";
+    String INSERT_CITY="http://192.168.0.5:8088/WeatherServer/LoginAction?username=%s&password=%s&style=insertCity&city=%s";
 
-    String REMOVE="http://192.168.1.30:8080/WeatherServer/LoginAction?username=%s&password=%s&style=remove&city=%s";
+    String REMOVE="http://192.168.0.5:8088/WeatherServer/LoginAction?username=%s&password=%s&style=remove&city=%s";
 }

@@ -18,22 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jal.base.BaseFragment;
+import com.jal.bean.LoginInfo;
 import com.jal.bean.WeatherInfoBean;
 import com.jal.contract.WeatherContract;
-import com.jal.util.NetworkUtil;
 import com.jal.util.ShareUtil;
 import com.jal.util.TTSManager;
 import com.jal.widget.WeatherChartView;
 import com.jal.widget.WeatherDetailView;
-import com.zaaach.citypicker.CityPickerActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import butterknife.Bind;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by SEELE on 2017/4/17.
@@ -138,7 +136,7 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
         Log.d("print", "------------" + weatherInfoBean);
         if (weatherInfoBean != null) {
             infoBean=weatherInfoBean;
-
+            Log.d("print","toolbar"+toolbar);
             toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
@@ -158,8 +156,12 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
                         }
                         return true;
                     } else if (id == R.id.menu_more) {
-                        startActivityForResult(new Intent(getActivity(), CityPickerActivity.class),
-                                REQUEST_CODE_PICK_CITY);
+                        MainActivity activity= (MainActivity) getActivity();
+                        LoginInfo info = activity.getInfo();
+                        ArrayList<String> city = (ArrayList<String>) info.getCity();
+                        Intent intent=new Intent(activity,MyCityActivity.class);
+                        intent.putExtra("city",city);
+                        startActivity(intent);
                         return true;
                     }
                     return false;
@@ -221,7 +223,7 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
                 case 6:
                     wk = "周六";
                     break;
-                case 7:
+                case 0:
                     wk = "周日";
                     break;
 
@@ -284,22 +286,6 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
         WeatherDetailView detailView = new WeatherDetailView(getContext());
         detailView.setWeather5(weather5);
         return detailView;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK) {
-            if (data != null) {
-                String city = data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY);
-                boolean networkAvailable = NetworkUtil.isNetworkConnected(getContext());
-                if(networkAvailable){
-                    presenter.loadPost(city);
-                }else {
-                    Toast.makeText(getContext(),"请检查网络是否正常！",Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        }
     }
 
     @Override
